@@ -1,0 +1,49 @@
+{
+  "name": "discordbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp && node -r dotenv/config dist/app.js | pino-pretty-min",
+    "build": "gulp"
+  },
+  "bin":{
+      "create-command": "./bin/create-command.js"
+  },
+  "author": "MadScripter",
+  "license": "MIT",
+  "dependencies": {
+    "bufferutil": "^4.0.0",
+    "discord.js": "^11.4.2",
+    "dot-prop": "^4.2.0",
+    "dotenv": "^6.1.0",
+    "enquirer": "^2.1.1",
+    "env-var": "^3.4.1",
+    "erlpack": "hammerandchisel/erlpack",
+    "ffmpeg-binaries": "^4.0.0",
+    "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11",
+    "node-graceful-shutdown": "^1.0.1",
+    "node-opus": "^0.3.1",
+    "pino": "^5.9.0",
+    "reflect-metadata": "^0.1.12",
+    "sodium": "^3.0.1",
+    "sqlite3": "^4.0.4",
+    "typeorm": "^0.2.9",
+    "uws": "^99.0.0"
+  },
+  "devDependencies": {
+    "@types/dot-prop": "^4.2.0",
+    "@types/fs-extra": "^5.0.4",
+    "@types/lodash": "^4.14.118",
+    "@types/node": "^10.12.10",
+    "@types/pino": "^5.8.3",
+    "copyfiles": "^2.1.0",
+    "gulp": "^4.0.0",
+    "gulp-copy": "^4.0.1",
+    "gulp-typescript": "^5.0.0",
+    "pino-pretty-min": "^0.2.1",
+    "ts-loader": "^5.3.1",
+    "typescript": "^3.2.1"
+  }
+}
