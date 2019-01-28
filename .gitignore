@@ -4,7 +4,8 @@ tsconfig.json
 gulpfile.js
 
 # compiled output
-/src
+# /src
+/dist 
 /tmp
 /out-tsc
 
