@@ -1,5 +1,5 @@
 {
-  "name": "discordbot",
+  "name": "clank",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,13 +7,11 @@
     "start": "gulp && node -r dotenv/config dist/app.js | pino-pretty-min",
     "build": "gulp"
   },
-  "bin":{
-      "create-command": "./bin/create-command.js"
-  },
   "author": "MadScripter",
   "license": "MIT",
   "dependencies": {
     "bufferutil": "^4.0.0",
+    "chokidar": "^2.0.4",
     "discord.js": "^11.4.2",
     "dot-prop": "^4.2.0",
     "dotenv": "^6.1.0",
@@ -33,6 +31,7 @@
     "uws": "^99.0.0"
   },
   "devDependencies": {
+    "@types/chokidar": "^1.7.5",
     "@types/dot-prop": "^4.2.0",
     "@types/fs-extra": "^5.0.4",
     "@types/lodash": "^4.14.118",

@@ -12,7 +12,7 @@ class Help extends classes_1.Command {
     async run() {
         if (this.HasParameters) {
             const commandName = this.PassedParameters[0];
-            const command = this.Bot.Commands.find(cmd => cmd.Data.name === commandName);
+            const command = this.Bot.Commands.find(cmd => cmd.Data.name == commandName);
             await this.Message.reply(command ?
                 `\n${command.help}` : `Unable to find a command with the name "${commandName}"`);
             return;

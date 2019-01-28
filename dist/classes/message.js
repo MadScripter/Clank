@@ -15,17 +15,17 @@ class Message {
     get Command() {
         const command = this.bot
             .Commands
-            .filter((cmd) => cmd.Data.name === this.RequestCommand)[0];
+            .find(cmd => cmd.Data.name === this.RequestCommand);
         if (!command)
-            return null;
+            return undefined;
         command.Message = this.discordMessage;
         command.Bot = this.bot;
         return command;
     }
     get RequestCommand() {
-        let command = this.Content.split(this.Prefix)[1];
-        return command.indexOf(' ') > -1 ?
-            command.split(' ')[0].toLowerCase().trim() : command.toLowerCase().trim();
+        const command = this.Content.split(this.Prefix)[1];
+        return (command.indexOf(' ') > -1 ?
+            command.split(' ')[0] : command).toLowerCase().trim();
     }
     get Content() {
         return this.discordMessage.content;
@@ -37,10 +37,7 @@ class Message {
         return this.discordMessage.author.bot;
     }
     get IsCommand() {
-        if ((this.Content.substring(0, this.Prefix.length) === this.Prefix) && !this.IsBot) {
-            return this.Command != null;
-        }
-        return false;
+        return this.Content.substring(0, this.Prefix.length) === this.Prefix;
     }
 }
 exports.Message = Message;

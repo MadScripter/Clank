@@ -4,16 +4,18 @@ const pino = require("pino");
 const env = require("env-var");
 const path = require("path");
 const enums_1 = require("../enums");
-const config_1 = require("./config");
+const _1 = require(".");
 class Command {
     constructor(filename) {
-        this.config = new config_1.default();
+        this.config = new _1.Config();
         this.config.load(path.join(path.dirname(filename), 'config.json'));
         this.data = this.config.Content;
         this.logger = pino({ name: `command:${this.data.name}` });
-        this.logger.info(`Initiliazed command: ${this.data.name}`);
+        this.enabled = true;
     }
     async execute() {
+        if (!this.enabled)
+            return;
         if (!this.IsAuthorized)
             return;
         this.logger.info(`running command: ${this.data.name}`);
@@ -25,11 +27,17 @@ class Command {
     get Data() {
         return this.data;
     }
+    get Enabled() {
+        return this.enabled;
+    }
+    set Enabled(value) {
+        this.enabled = value;
+    }
     get Bot() {
         return this.bot;
     }
-    set Bot(bot) {
-        this.bot = bot;
+    set Bot(value) {
+        this.bot = value;
     }
     get Message() {
         return this.message;
@@ -51,6 +59,10 @@ class Command {
     get IsAuthorized() {
         if (this.IsByAdmin)
             return true;
+        if (this.Restrictions === enums_1.ERestrictions.ADMIN_ONLY)
+            return this.IsByAdmin;
+        if (this.Restrictions === enums_1.ERestrictions.PM_ONLY)
+            return this.IsPrivateChannel;
         if (this.data.roles.length > 0 && !this.IsPrivateChannel) {
             return this.message
                 .member
@@ -59,10 +71,6 @@ class Command {
                 .roles
                 .map(role => role.toLowerCase()).includes(r.name.toLowerCase()));
         }
-        if (this.Restrictions === enums_1.ERestrictions.ADMIN_ONLY)
-            return this.IsByAdmin;
-        if (this.Restrictions === enums_1.ERestrictions.PM_ONLY)
-            return this.IsPrivateChannel;
         return (this.Restrictions === enums_1.ERestrictions.NONE);
     }
     get HasParameters() {
@@ -84,7 +92,8 @@ class Command {
             stringsArray = matchedStrings
                 .map((str) => str.replace(/\"/g, ''));
         }
-        return [...new Set(stringsArray.concat(args.split(' ')))];
+        return [...new Set(stringsArray.concat(args.split(' ')))]
+            .filter(Boolean);
     }
     get parameters() {
         return this.data.params.map((param) => {
@@ -92,7 +101,7 @@ class Command {
         }).join(' ');
     }
     get help() {
-        let details = `— **${process.env.DEFAULT_PREFIX}${this.data.name}**`;
+        let details = `— **${env.get('DEFAULT_PREFIX').asString()}${this.data.name}**`;
         if (this.data.description)
             details = details.concat(` - *${this.data.description}*`);
         if (this.data.params.length > 0)

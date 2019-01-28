@@ -18,12 +18,8 @@ class Config {
         const content = fs_extra_1.readJSONSync(path, { throws: true });
         this.content = content;
     }
-    reload() {
-    }
     save() {
         fs_extra_1.writeJSON(this.path, this.content, { spaces: 4 }).catch(this.logger.error);
-    }
-    watch() {
     }
     get(key) {
         return dotprop.get(this.content, key);
@@ -41,4 +37,4 @@ class Config {
         return this.content;
     }
 }
-exports.default = Config;
+exports.Config = Config;
