@@ -1,6 +1,8 @@
-A modular discord bot written in TypeScript
-##### <center>A modular discord bot written in TypeScript</center>
-<center>![](https://img.shields.io/badge/Node-v12-green?style=for-the-badge&logo=nodedotjs) ![](https://img.shields.io/badge/Typescript-v3.1.4-blue?style=for-the-badge&logo=typescript)</center>
+#### <p align="center">A modular discord bot written in TypeScript</p>
+<p align="center">
+ <img src="https://img.shields.io/badge/Node-v12-green?style=for-the-badge&logo=nodedotjs">
+  <img src="https://img.shields.io/badge/Typescript-v3.1.4-blue?style=for-the-badge&logo=typescript">
+</p>
 
 ------------
 
