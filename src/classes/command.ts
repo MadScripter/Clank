@@ -24,7 +24,7 @@ export abstract class Command
         
         this.data = this.config.Content as ICommandConfig
 
-        this.logger = pino({ name: `command:${this.data.name}`})
+        this.logger = pino({ name: `command::${this.data.name}`})
 
         this.enabled = true
     }

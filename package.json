@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "gulp && node -r dotenv/config dist/app.js | pino-pretty-min",
+    "start": "node -r dotenv/config dist/app.js | pino-pretty-min",
     "build": "gulp"
   },
   "author": "MadScripter",
